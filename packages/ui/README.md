@@ -41,18 +41,13 @@ Ensure your project has the following peer dependencies installed:
 
 ### **1. Import Styles**
 
-Import the library's CSS at the root of your application (e.g., main.tsx or \_app.tsx). This includes the Xebec brand theme, Shadcn variables, and components styles.
-
-```typescript
-import "@xebecship/ui/style.css";
-```
-
-Or in your base css file
+Import the library's CSS and the XebecShip theme in the base css file of your application. This includes the Xebec brand theme, Shadcn variables, and components styles.
 
 ```css
 // @import "tailwindcss"; // If you're using tailwind css
 // @import "tw-animate-css"; // If you're using tailwind animate
-@import "@xebecship/ui/style.css";
+@import "@xebecship/ui/style.css"; // Components CSS
+@import "@xebecship/ui/style.css"; // XebecShip theme & brand identity
 ```
 
 ## **Usage**

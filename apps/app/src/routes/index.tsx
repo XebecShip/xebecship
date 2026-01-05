@@ -114,6 +114,15 @@ export default function Page() {
             <div className="bg-muted/50 aspect-video rounded-xl" />
           </div>
           <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" /> */}
+
+          <div>
+            <h1 className="font-serif text-3xl font-medium tracking-tight">
+              Mission Control
+            </h1>
+            <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+              Project ID: <span className="text-primary">{555}</span>
+            </p>
+          </div>
           <ExampleView />
         </div>
       </SidebarInset>

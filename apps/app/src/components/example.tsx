@@ -147,6 +147,8 @@ function Example({
 function CardExample() {
   return (
     <Example title="Card" className="items-center justify-center">
+      <h1 className="text-6xl">TITLE Serif</h1>
+      <p className="text-2xl">TEXT Sans Serif</p>
       <Card className="relative w-full max-w-sm overflow-hidden pt-0">
         <div className="bg-primary absolute inset-0 z-30 aspect-video opacity-50 mix-blend-color" />
         <img
