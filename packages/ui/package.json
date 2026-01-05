@@ -1,14 +1,13 @@
 {
   "name": "@xebecship/ui",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Xebec UI - A React component library for building modern web applications.",
   "type": "module",
   "author": "XebecShip",
   "license": "MIT",
   "files": [
     "dist",
-    "README.md",
-    "./src/theme.css"
+    "README.md"
   ],
   "publishConfig": {
     "access": "public"
@@ -18,13 +17,13 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./theme.css": "./src/theme.css"
+    "./style.css": "./dist/style.css"
   },
   "sideEffects": [
     "**/*.css"
   ],
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "vite",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
     "check": "tsc --noEmit",

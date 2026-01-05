@@ -43,18 +43,16 @@ Ensure your project has the following peer dependencies installed:
 
 Import the library's CSS at the root of your application (e.g., main.tsx or \_app.tsx). This includes the Xebec brand theme and Tailwind variables.
 
-TypeScript
+```typescript
+import "@xebecship/ui/style.css";
+```
 
-import "@xebecship/ui/theme.css";
-
-### **2. Configure Tailwind v4**
-
-Since @xebecship/ui uses Tailwind CSS v4, ensure your tailwind.config or CSS entry point is set up to process the components. In v4, you can simply import the library's theme variables into your main CSS file:
+Or in your base css file
 
 ```css
-@import "tailwindcss";
+// @import "tailwindcss"; // If you're using tailwind css
 // @import "tw-animate-css"; // If you're using tailwind animate
-@import "@xebecship/ui/theme.css";
+@import "@xebecship/ui/style.css";
 ```
 
 ## **Usage**

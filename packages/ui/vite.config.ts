@@ -39,7 +39,7 @@ export default defineConfig({
         preserveModules: true,
         preserveModulesRoot: "src",
         entryFileNames: "[name].js",
-        assetFileNames: "[name][extname]" // Simple & non-deprecated
+        assetFileNames: "[name][extname]"
       }
     }
   }
