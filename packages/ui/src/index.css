@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* OKLCH Color Palette - The Xebec Ship Standard (Light Mode) */
+  /* Background: Cool White/Paper */
+  --background: oklch(0.985 0.01 240);
+  /* Foreground: Deep Navy Text */
+  --foreground: oklch(0.14 0.05 260);
+
+  /* Card: Slightly distinct from background */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.14 0.05 260);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.14 0.05 260);
+
+  /* Primary: Electric Teal (The Xebec Agility) */
+  --primary: oklch(0.55 0.15 200);
+  --primary-foreground: oklch(0.98 0.01 240);
+
+  /* Secondary: Sandstone/Subtle Gold */
+  --secondary: oklch(0.92 0.04 85);
+  --secondary-foreground: oklch(0.25 0.08 85);
+
+  /* Muted: Cool Slate */
+  --muted: oklch(0.94 0.02 240);
+  --muted-foreground: oklch(0.45 0.04 260);
+
+  /* Accent: Hover states (Teal tint) */
+  --accent: oklch(0.94 0.03 200);
+  --accent-foreground: oklch(0.4 0.1 200);
+
+  /* Destructive: Corsair Red */
+  --destructive: oklch(0.57 0.22 27);
+
+  /* Borders & Inputs: Neutral Slate */
+  --border: oklch(0.88 0.03 240);
+  --input: oklch(0.88 0.03 240);
+
+  /* Ring: Corsair Gold (Focus State) */
+  --ring: oklch(0.7 0.15 85);
+
+  /* Chart Colors */
+  --chart-1: oklch(0.55 0.15 200); /* Teal */
+  --chart-2: oklch(0.65 0.18 85); /* Gold */
+  --chart-3: oklch(0.57 0.22 27); /* Red */
+  --chart-4: oklch(0.45 0.12 260); /* Navy */
+  --chart-5: oklch(0.6 0.12 30); /* Orange */
+
+  /* Design Tokens - Brutalist/Sharp Edge Strategy */
+  --radius: 0;
+
+  /* Sidebar Identity (Light) */
+  --sidebar: oklch(0.97 0.02 240);
+  --sidebar-foreground: oklch(0.14 0.05 260);
+  --sidebar-primary: oklch(0.55 0.15 200);
+  --sidebar-primary-foreground: oklch(0.98 0.01 240);
+  --sidebar-accent: oklch(0.94 0.03 200);
+  --sidebar-accent-foreground: oklch(0.4 0.1 200);
+  --sidebar-border: oklch(0.88 0.03 240);
+  --sidebar-ring: oklch(0.7 0.15 85);
+}
+
+.dark {
+  /* OKLCH Color Palette - The Xebec Ship Standard (Dark Mode) */
+  /* Background: Deep Ocean Navy */
+  --background: oklch(0.12 0.04 265);
+  /* Foreground: Bright Mist */
+  --foreground: oklch(0.96 0.02 240);
+
+  /* Card: Slightly lighter Navy */
+  --card: oklch(0.15 0.05 265);
+  --card-foreground: oklch(0.96 0.02 240);
+
+  --popover: oklch(0.15 0.05 265);
+  --popover-foreground: oklch(0.96 0.02 240);
+
+  /* Primary: Electric Teal (Brighter for Dark Mode) */
+  --primary: oklch(0.65 0.15 200);
+  --primary-foreground: oklch(0.12 0.04 265);
+
+  /* Secondary: Dark Bronze/Gold */
+  --secondary: oklch(0.25 0.06 85);
+  --secondary-foreground: oklch(0.9 0.08 85);
+
+  /* Muted: Deep Slate */
+  --muted: oklch(0.2 0.04 265);
+  --muted-foreground: oklch(0.7 0.04 240);
+
+  /* Accent: Deep Teal Tint */
+  --accent: oklch(0.2 0.06 200);
+  --accent-foreground: oklch(0.9 0.05 200);
+
+  /* Destructive: Corsair Red */
+  --destructive: oklch(0.57 0.22 27);
+
+  /* Borders: Navy/Slate boundary */
+  --border: oklch(0.25 0.04 265);
+  --input: oklch(0.25 0.04 265);
+
+  /* Ring: Corsair Gold */
+  --ring: oklch(0.7 0.15 85);
+
+  /* Charts */
+  --chart-1: oklch(0.65 0.15 200); /* Teal */
+  --chart-2: oklch(0.75 0.15 85); /* Gold */
+  --chart-3: oklch(0.57 0.22 27); /* Red */
+  --chart-4: oklch(0.5 0.1 260); /* Navy Light */
+  --chart-5: oklch(0.65 0.15 30); /* Orange */
+
+  --radius: 0;
+
+  /* Sidebar Identity (Dark) */
+  --sidebar: oklch(0.14 0.05 265);
+  --sidebar-foreground: oklch(0.96 0.02 240);
+  --sidebar-primary: oklch(0.65 0.15 200);
+  --sidebar-primary-foreground: oklch(0.12 0.04 265);
+  --sidebar-accent: oklch(0.2 0.06 200);
+  --sidebar-accent-foreground: oklch(0.9 0.05 200);
+  --sidebar-border: oklch(0.25 0.04 265);
+  --sidebar-ring: oklch(0.7 0.15 85);
+}
+
+@theme inline {
+  /* Typography Configuration */
+  --font-serif: "Space Grotesk Variable", serif;
+  --font-sans: "JetBrains Mono Variable", monospace;
+  --font-mono: "JetBrains Mono Variable", monospace;
+
+  /* Color Mapping - Tailwind v4 Standard */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Sidebar Configuration */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Force Sharp Radii Globally */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-bold tracking-tight;
+  }
+}

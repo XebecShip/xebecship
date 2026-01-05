@@ -1,0 +1,9 @@
+{
+  "extends": "@xebecship/config/node/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["node"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

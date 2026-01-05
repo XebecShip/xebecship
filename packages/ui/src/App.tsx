@@ -1,0 +1,583 @@
+import * as React from "react";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  SidebarMenuAction,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  Separator,
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+  useSidebar
+} from "@xebecship/ui";
+
+import {
+  BadgeCheckIcon,
+  BellIcon,
+  CreditCardIcon,
+  LogOutIcon,
+  SparklesIcon,
+  FolderIcon,
+  ForwardIcon,
+  MoreHorizontalIcon,
+  Trash2Icon,
+  ChevronsUpDown,
+  PlusIcon,
+  LayoutDashboardIcon,
+  UsersIcon,
+  DatabaseIcon,
+  KeyIcon,
+  PlugIcon,
+  PaletteIcon,
+  AudioWaveform,
+  BookOpen,
+  BotIcon,
+  CommandIcon,
+  FrameIcon,
+  GalleryVerticalEndIcon,
+  MapIcon,
+  PieChartIcon,
+  Settings2Icon,
+  SquareTerminalIcon,
+  ChevronRightIcon,
+  type LucideIcon
+} from "lucide-react";
+
+export function App() {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator
+              orientation="vertical"
+              className="mr-2 data-[orientation=vertical]:h-4"
+            />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="bg-muted/50 aspect-video rounded-xl" />
+            <div className="bg-muted/50 aspect-video rounded-xl" />
+            <div className="bg-muted/50 aspect-video rounded-xl" />
+          </div>
+          <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function NavMain({
+  items
+}: {
+  items: {
+    title: string;
+    url: string;
+    icon?: LucideIcon;
+    isActive?: boolean;
+    items?: {
+      title: string;
+      url: string;
+    }[];
+  }[];
+  projectId: string;
+}) {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item) => (
+          <Collapsible
+            key={item.title}
+            defaultOpen={item.isActive}
+            className="group/collapsible"
+            render={
+              <SidebarMenuItem>
+                <CollapsibleTrigger
+                  render={
+                    <SidebarMenuButton tooltip={item.title}>
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                      <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </SidebarMenuButton>
+                  }
+                />
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.items?.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <SidebarMenuSubButton
+                          render={
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          }
+                        />
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            }
+          />
+        ))}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+}
+
+export function NavProjects({
+  projects
+}: {
+  projects: {
+    name: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
+}) {
+  const { isMobile } = useSidebar();
+
+  return (
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarMenu>
+        {projects.map((item) => (
+          <SidebarMenuItem key={item.name}>
+            <SidebarMenuButton
+              render={
+                <a href={item.url}>
+                  <item.icon />
+                  <span>{item.name}</span>
+                </a>
+              }
+            />
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <SidebarMenuAction showOnHover>
+                    <MoreHorizontalIcon />
+                    <span className="sr-only">More</span>
+                  </SidebarMenuAction>
+                }
+              />
+              <DropdownMenuContent
+                className="w-48 rounded-lg"
+                side={isMobile ? "bottom" : "right"}
+                align={isMobile ? "end" : "start"}
+              >
+                <DropdownMenuItem>
+                  <FolderIcon className="text-muted-foreground" />
+                  <span>View Project</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <ForwardIcon className="text-muted-foreground" />
+                  <span>Share Project</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Trash2Icon className="text-muted-foreground" />
+                  <span>Delete Project</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        ))}
+        <SidebarMenuItem>
+          <SidebarMenuButton className="text-sidebar-foreground/70">
+            <MoreHorizontalIcon className="text-sidebar-foreground/70" />
+            <span>More</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+}
+
+export function NavUser({
+  user
+}: {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+}) {
+  const { isMobile } = useSidebar();
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                <Avatar className="h-8 w-8 rounded-lg">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate text-xs">{user.email}</span>
+                </div>
+                <ChevronsUpDown className="ml-auto size-4" />
+              </SidebarMenuButton>
+            }
+          />
+          <DropdownMenuContent
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            side={isMobile ? "bottom" : "right"}
+            align="end"
+            sideOffset={4}
+          >
+            <DropdownMenuLabel className="p-0 font-normal">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <Avatar className="h-8 w-8 rounded-lg">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate text-xs">{user.email}</span>
+                </div>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <SparklesIcon />
+                Upgrade to Pro
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <BadgeCheckIcon />
+                Account
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <CreditCardIcon />
+                Billing
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <BellIcon />
+                Notifications
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <LogOutIcon />
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+}
+
+export function TeamSwitcher({
+  teams
+}: {
+  teams: {
+    name: string;
+    logo: React.ElementType;
+    plan: string;
+  }[];
+}) {
+  const { isMobile } = useSidebar();
+  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+
+  if (!activeTeam) {
+    return null;
+  }
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <DropdownMenuGroup>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <SidebarMenuButton
+                  size="lg"
+                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                >
+                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                    <activeTeam.logo className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-medium">
+                      {activeTeam.name}
+                    </span>
+                    <span className="truncate text-xs">{activeTeam.plan}</span>
+                  </div>
+                  <ChevronsUpDown className="ml-auto" />
+                </SidebarMenuButton>
+              }
+            />
+            <DropdownMenuContent
+              className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+              align="start"
+              side={isMobile ? "bottom" : "right"}
+              sideOffset={4}
+            >
+              <DropdownMenuLabel className="text-muted-foreground text-xs">
+                Teams
+              </DropdownMenuLabel>
+              {teams.map((team, index) => (
+                <DropdownMenuItem
+                  key={team.name}
+                  onClick={() => setActiveTeam(team)}
+                  className="gap-2 p-2"
+                >
+                  <div className="flex size-6 items-center justify-center rounded-md border">
+                    <team.logo className="size-3.5 shrink-0" />
+                  </div>
+                  {team.name}
+                  <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2 p-2">
+                <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                  <PlusIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground font-medium">
+                  Add team
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </DropdownMenuGroup>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+}
+
+// This is sample data.
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg"
+  },
+  apps: [
+    {
+      name: "Acme Inc",
+      logo: GalleryVerticalEndIcon,
+      plan: "Enterprise"
+    },
+    {
+      name: "Acme Corp.",
+      logo: AudioWaveform,
+      plan: "Startup"
+    },
+    {
+      name: "Evil Corp.",
+      logo: CommandIcon,
+      plan: "Free"
+    }
+  ],
+  navMain: [
+    {
+      title: "Overview",
+      url: "/console/$projectId",
+      icon: LayoutDashboardIcon
+    },
+    {
+      title: "Users",
+      url: "/console/$projectId/users",
+      icon: UsersIcon
+    },
+    {
+      title: "Data",
+      url: "/console/$projectId/data",
+      icon: DatabaseIcon
+    },
+    {
+      title: "API Keys",
+      url: "/console/$projectId/api-keys",
+      icon: KeyIcon
+    },
+    {
+      title: "Provider",
+      url: "/console/$projectId/providers",
+      icon: PlugIcon
+    },
+    {
+      title: "Branding",
+      url: "/console/$projectId/branding",
+      icon: PaletteIcon
+    },
+    {
+      title: "Playground",
+      url: "#",
+      icon: SquareTerminalIcon,
+      isActive: true,
+      items: [
+        {
+          title: "History",
+          url: "#"
+        },
+        {
+          title: "Starred",
+          url: "#"
+        },
+        {
+          title: "Settings",
+          url: "#"
+        }
+      ]
+    },
+    {
+      title: "Models",
+      url: "#",
+      icon: BotIcon,
+      items: [
+        {
+          title: "Genesis",
+          url: "#"
+        },
+        {
+          title: "Explorer",
+          url: "#"
+        },
+        {
+          title: "Quantum",
+          url: "#"
+        }
+      ]
+    },
+    {
+      title: "Documentation",
+      url: "#",
+      icon: BookOpen,
+      items: [
+        {
+          title: "Introduction",
+          url: "#"
+        },
+        {
+          title: "Get Started",
+          url: "#"
+        },
+        {
+          title: "Tutorials",
+          url: "#"
+        },
+        {
+          title: "Changelog",
+          url: "#"
+        }
+      ]
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: Settings2Icon,
+      items: [
+        {
+          title: "General",
+          url: "#"
+        },
+        {
+          title: "Team",
+          url: "#"
+        },
+        {
+          title: "Billing",
+          url: "#"
+        },
+        {
+          title: "Limits",
+          url: "#"
+        }
+      ]
+    }
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: FrameIcon
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChartIcon
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: MapIcon
+    }
+  ]
+};
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  return (
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.apps} />
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} projectId={data.apps[0]!.name} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
+}

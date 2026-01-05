@@ -1,0 +1,8 @@
+{
+  "extends": "./src/shared/ts-config.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

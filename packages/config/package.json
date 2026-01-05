@@ -1,0 +1,51 @@
+{
+  "name": "@xebecship/config",
+  "version": "1.1.13",
+  "description": "The unified XebecShip toolkit. One install, all the tools.",
+  "type": "module",
+  "author": "XebecShip",
+  "license": "MIT",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./app/eslint": "./src/app/eslint.js",
+    "./app/prettier": "./src/app/prettier.js",
+    "./app/tsconfig": "./src/app/ts-config.json",
+    "./lib/eslint": "./src/lib/eslint.js",
+    "./lib/prettier": "./src/lib/prettier.js",
+    "./lib/tsconfig": "./src/lib/ts-config.json",
+    "./node/eslint": "./src/node/eslint.js",
+    "./node/prettier": "./src/node/prettier.js",
+    "./node/tsconfig": "./src/node/ts-config.json",
+    "./sdk/eslint": "./src/sdk/eslint.js",
+    "./sdk/prettier": "./src/sdk/prettier.js",
+    "./sdk/tsconfig": "./src/sdk/ts-config.json"
+  },
+  "scripts": {
+    "lint": "eslint . --fix",
+    "format": "prettier --write .",
+    "check": "tsc --noEmit",
+    "build": "vite build && mkdir -p dist/ && cp src/ts-*.json dist/",
+    "release": "pnpm version patch && pnpm publish --access public"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.51.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3"
+  }
+}

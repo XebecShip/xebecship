@@ -1,0 +1,18 @@
+{
+  "name": "xebecship",
+  "version": "0.0.1",
+  "description": "Home of XebecShip OSS projects",
+  "type": "module",
+  "author": "XebecShip",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r --parallel dev"
+  },
+  "devDependencies": {
+    "@xebecship/config": "workspace:*"
+  }
+}
